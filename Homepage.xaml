@@ -4,22 +4,132 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:MAINwpfAirportProject"
-      mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      mc:Ignorable="d"
+      d:DesignHeight="450"
+      d:DesignWidth="800"
       Title="Homepage">
-   
-        <Grid>
-        <Image Source="D:\MAINwpfAirportProject\צילום מסך 2026-01-01 103859.png"
-           Stretch="UniformToFill"/>
 
-        <Button
-    Content="Register"
-    Width="90"
-    Height="30"
-    HorizontalAlignment="Right"
-    VerticalAlignment="Top"
-    Margin="0,20,20,0"
-    Click="RegisterButton_Click"/>
-                     
+    <Grid>
+
+        <!-- background -->
+        <Image Source="D:\MAINwpfAirportProject\pictures\צילום מסך 2026-01-01 103859.png"
+               Stretch="UniformToFill"/>
+
+        <!-- top bar -->
+        <Grid Height="70"
+              VerticalAlignment="Top">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Text="AeroHub"
+                       FontSize="40"
+                       FontWeight="Bold"
+                       Foreground="#061A40"
+                       VerticalAlignment="Center"
+                       Margin="20,0,0,0"/>
+
+            <Button Grid.Column="1"
+                    Content="Register"
+                    Width="110"
+                    Height="36"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Center"
+                    Margin="0,0,20,0"
+                    Background="Transparent"
+                    BorderThickness="0"
+                    Foreground="#111111"
+                    FontSize="16"
+                    FontWeight="Bold"
+                    Cursor="Hand"
+                    Click="RegisterButton_Click">
+
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="TextBlock.TextDecorations" Value="{x:Null}"/>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="TextBlock.TextDecorations" Value="Underline"/>
+                                <Setter Property="Foreground" Value="#061A40"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+
+            </Button>
         </Grid>
+
+        <!-- public actions -->
+        <Grid HorizontalAlignment="Center"
+              VerticalAlignment="Center"
+              Margin="0,80,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="200"/>
+                <ColumnDefinition Width="25"/>
+                <ColumnDefinition Width="200"/>
+                <ColumnDefinition Width="25"/>
+                <ColumnDefinition Width="200"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- arrivals -->
+            <Button Grid.Column="0"
+                    Height="140"
+                    Background="#AAFFFFFF"
+                    BorderThickness="0"
+                    Cursor="Hand">
+                <StackPanel VerticalAlignment="Center">
+                    <TextBlock Text="Arrivals"
+                               FontSize="20"
+                               FontWeight="Bold"
+                               HorizontalAlignment="Center"/>
+                    <TextBlock Text="Live arrival flights"
+                               FontSize="13"
+                               Foreground="Gray"
+                               Margin="0,6,0,0"
+                               HorizontalAlignment="Center"/>
+                </StackPanel>
+            </Button>
+
+            <!-- departures -->
+            <Button Grid.Column="2"
+                    Height="140"
+                    Background="#AAFFFFFF"
+                    BorderThickness="0"
+                    Cursor="Hand">
+                <StackPanel VerticalAlignment="Center">
+                    <TextBlock Text="Departures"
+                               FontSize="20"
+                               FontWeight="Bold"
+                               HorizontalAlignment="Center"/>
+                    <TextBlock Text="Scheduled and delayed flights"
+                               FontSize="13"
+                               Foreground="Gray"
+                               Margin="0,6,0,0"
+                               HorizontalAlignment="Center"/>
+                </StackPanel>
+            </Button>
+
+            <!-- flight status -->
+            <Button Grid.Column="4"
+                    Height="140"
+                    Background="#AAFFFFFF"
+                    BorderThickness="0"
+                    Cursor="Hand">
+                <StackPanel VerticalAlignment="Center">
+                    <TextBlock Text="Flight Status"
+                               FontSize="20"
+                               FontWeight="Bold"
+                               HorizontalAlignment="Center"/>
+                    <TextBlock Text="By flight number"
+                               FontSize="13"
+                               Foreground="Gray"
+                               Margin="0,6,0,0"
+                               HorizontalAlignment="Center"/>
+                </StackPanel>
+            </Button>
+
+        </Grid>
+
+    </Grid>
 </Page>

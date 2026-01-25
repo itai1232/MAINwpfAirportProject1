@@ -27,7 +27,11 @@ namespace MAINwpfAirportProject
     {
         List<string> countriesList = new List<string>();
         Airportsapi airportsapi=new Airportsapi();
+        List<string> personsemailList = new List<string>();
+        List<string> personsphoneList = new List<string>();
         CountriesList cList;
+        PersonList pList;
+        
         public RegisterPage()
         {
             InitializeComponent();
@@ -49,6 +53,15 @@ namespace MAINwpfAirportProject
             }
             countriesscrollview.ItemsSource = countriesList;
         }
+        public async Task SelectAllPersons()
+        {
+            pList = await (airportsapi.GetAllPersons());
+            foreach (Person person in pList)
+            {
+                personsemailList.Add(person.Email);
+                personsphoneList.Add(person.Telephone);
+            }
+        }
         private void BackToLogin_Click(object sender, RoutedEventArgs e)
         {
             this.NavigationService.Navigate(new LoginPage());
@@ -61,65 +74,135 @@ namespace MAINwpfAirportProject
                 Countries c = cList[countriesscrollview.SelectedIndex];           
             }
         }
-        private void TogglePassword_Click(object sender, RoutedEventArgs e)
+        private bool IsValidName(string text)
         {
-            if (PasswordBox.Visibility == Visibility.Visible)
+            if (string.IsNullOrWhiteSpace(text) || text.Length < 2)
+                return false;
+
+            foreach (char c in text)
             {
-                // Show password
-                PasswordTextBox.Text = PasswordBox.Password;
-                PasswordBox.Visibility = Visibility.Collapsed;
-                PasswordTextBox.Visibility = Visibility.Visible;
-                TogglePasswordButton.Content = "🔒";
+                if (!char.IsLetter(c))
+                    return false;
             }
+
+            return true;
+        }
+
+        private bool IsValidEmail(string email)
+        {
+            if (string.IsNullOrWhiteSpace(email))
+                return false;
+
+            return email.Contains("@") && email.Contains(".");
+        }
+       
+
+        private bool IsValidPhone(string phone)
+        {
+            if (string.IsNullOrWhiteSpace(phone))
+                return false;
+            // בשביל מספרי טלפון גלובלים + בהתחלה
+            if (phone.StartsWith("+"))
+                phone = phone.Substring(1);
+            // בדיקה שכל השאר ספרות ולא דברים אחרים
+            if (!phone.All(char.IsDigit))
+                return false;
+            // אורך גלובלי מקובל
+            return phone.Length >= 7 && phone.Length <= 15;
+        }
+        private void ShowError(TextBox box, TextBlock error, string message)
+        {
+            box.BorderBrush = Brushes.Red;
+            error.Text = message;
+            error.Visibility = Visibility.Visible;
+        }
+
+        private void ClearError(TextBox box, TextBlock error)
+        {
+            box.ClearValue(Border.BorderBrushProperty);
+            error.Visibility = Visibility.Hidden;
+        }
+        private bool PhoneExists(string phone)
+        {
+            return personsphoneList.Find(u => u == phone) != null;
+        }
+        private bool EmailExists(string email)
+        {
+            return personsemailList.Find(u => u == email) != null;
+        }
+        private void Register_Click(object sender, RoutedEventArgs e)
+        {
+            bool isValid = true;
+
+            SelectAllPersons();
+            ClearError(FirstNameTextBox, FirstNameError);
+            ClearError(LastNameTextBox, LastNameError);
+            ClearError(EmailTextBox, EmailError);
+            ClearError(PhoneTextBox, PhoneError); 
+            
+
+            if (!IsValidName(FirstNameTextBox.Text))
+            {
+                ShowError(FirstNameTextBox, FirstNameError, "Invalid first name");
+                isValid = false;
+            }
+
+            if (!IsValidName(LastNameTextBox.Text))
+            {
+                ShowError(LastNameTextBox, LastNameError, "Invalid last name");
+                isValid = false;
+            }
+
+            if (!IsValidEmail(EmailTextBox.Text))
+            {
+                ShowError(EmailTextBox, EmailError, "Invalid email");
+                isValid = false;
+            }
+            if (EmailExists(EmailTextBox.Text))
+            {
+                ShowError(EmailTextBox, EmailError, "Email already exists");
+                isValid = false;
+            }
+            
+            if (!IsValidPhone(PhoneTextBox.Text))
+            {
+                ShowError(PhoneTextBox, PhoneError, "Invalid phone");
+                isValid = false;
+            }
+             if (PhoneExists(PhoneTextBox.Text))
+            {
+                ShowError(PhoneTextBox, PhoneError, "Phone already exists");
+                isValid = false;
+            }
+
+            if (!isValid)
+                return;
+            Passenger newPassenger = new Passenger
+            {
+                FirstName = FirstNameTextBox.Text,
+                LastName = LastNameTextBox.Text,
+                Email = EmailTextBox.Text,
+                Telephone = PhoneTextBox.Text,
+                PersonCountry = cList[countriesscrollview.SelectedIndex] 
+            }; 
+
+            InsertAPassenger(newPassenger);
+            
+            
+        }
+        public async void InsertAPassenger(Passenger passenger)
+        {
+            int x= await airportsapi.InsertAPassenger(passenger);
+            if(x>0)
+                MessageBox.Show("Registration successful ✔");
             else
-            {
-                // Hide password
-                PasswordBox.Password = PasswordTextBox.Text;
-                PasswordTextBox.Visibility = Visibility.Collapsed;
-                PasswordBox.Visibility = Visibility.Visible;
-                TogglePasswordButton.Content = "👁";
-            }
+                MessageBox.Show("Registration not successful");
+
         }
-        private void ToggleConfirmPassword_Click(object sender, RoutedEventArgs e)
+        private void BackToHome_Click(object sender, RoutedEventArgs e)
         {
-            if (ConfirmPasswordBox.Visibility == Visibility.Visible)
-            {
-                // Show password
-                ConfirmPasswordTextBox.Text = ConfirmPasswordBox.Password;
-                ConfirmPasswordBox.Visibility = Visibility.Collapsed;
-                ConfirmPasswordTextBox.Visibility = Visibility.Visible;
-                ToggleConfirmPasswordButton.Content = "🔒";
-            }
-            else
-            {
-                // Hide password
-                ConfirmPasswordBox.Password = ConfirmPasswordTextBox.Text;
-                ConfirmPasswordTextBox.Visibility = Visibility.Collapsed;
-                ConfirmPasswordBox.Visibility = Visibility.Visible;
-                ToggleConfirmPasswordButton.Content = "👁";
-            }
+            NavigationService.Navigate(new Homepage());
         }
-        private void Password_Changed(object sender, RoutedEventArgs e)
-        {
-            if (sender == PasswordTextBox && PasswordTextBox.Visibility == Visibility.Visible)
-            {
-                PasswordBox.Password = PasswordTextBox.Text;
-            }
-            else if (sender == PasswordBox && PasswordBox.Visibility == Visibility.Visible)
-            {
-                PasswordTextBox.Text = PasswordBox.Password;
-            }
-        }
-        private void ConfirmPassword_Changed(object sender, RoutedEventArgs e)
-        {
-            if (sender == ConfirmPasswordTextBox && ConfirmPasswordTextBox.Visibility == Visibility.Visible)
-            {
-                ConfirmPasswordBox.Password = ConfirmPasswordTextBox.Text;
-            }
-            else if (sender == ConfirmPasswordBox && ConfirmPasswordBox.Visibility == Visibility.Visible)
-            {
-                ConfirmPasswordTextBox.Text = ConfirmPasswordBox.Password;
-            }
-        }
+
     }
 }

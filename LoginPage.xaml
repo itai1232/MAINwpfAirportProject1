@@ -9,77 +9,82 @@
       Title="LoginPage">
 
     <Grid>
-        <Image Source="D:\MAINwpfAirportProject\betterRegisterPic.png"
-           Stretch="UniformToFill"/>
+        <Image Source="D:\MAINwpfAirportProject\pictures\betterRegisterPic.png"
+       Stretch="UniformToFill"/>
+        <Border Width="40"
+        Height="40"
+        CornerRadius="19"
+        Background="#AAFFFFFF"
+        HorizontalAlignment="Left"
+        VerticalAlignment="Top"
+        Margin="20">
+
+            <Button Content="X"
+            FontSize="30"
+            FontWeight="Bold"
+            Background="Transparent"
+            BorderThickness="0"
+            Cursor="Hand"
+            Click="BackToHome_Click"/>
+        </Border>
 
         <Border
-    Width="380"
-    Padding="25"
-    Background="#AAFFFFFF"
-    CornerRadius="12"
-    HorizontalAlignment="Center"
-    VerticalAlignment="Center">
+        Width="380"
+        Padding="25"
+        Background="#AAFFFFFF"
+        CornerRadius="12"
+        HorizontalAlignment="Center"
+        VerticalAlignment="Center">
 
             <StackPanel>
 
                 <TextBlock Text="Login"
-                   FontSize="26"
-                   FontWeight="Bold"
-                   Margin="0,0,0,20"
-                   HorizontalAlignment="Center"/>
+               FontSize="26"
+               FontWeight="Bold"
+               Margin="0,0,0,20"
+               HorizontalAlignment="Center"/>
 
-                
-                
-               
+                <!-- Name -->
+                <TextBlock Text="First Name" FontSize="12" Foreground="Gray"/>
+                <TextBox Height="35" Margin="0,0,0,2" Padding="8" x:Name="FirstNameTextBox"/>
+                <TextBlock x:Name="FirstNameError"
+                       FontSize="11"
+                       Foreground="Red"
+                       Visibility="Hidden"
+                       Margin="2,0,0,6"/>
 
-                <!-- Email -->
+                <TextBlock Text="Last Name" FontSize="12" Foreground="Gray"/>
+                <TextBox Height="35" Margin="0,0,0,2" Padding="8" x:Name="LastNameTextBox"/>
+                <TextBlock x:Name="LastNameError"
+                       FontSize="11"
+                       Foreground="Red"
+                       Visibility="Hidden"
+                       Margin="2,0,0,6"/>
+
+                <!-- email -->
                 <TextBlock Text="Email" FontSize="12" Foreground="Gray"/>
-                <TextBox Height="32" Margin="0,0,0,10" Padding="8"/>
-
-               
-                <!-- Password -->
-                <!--<TextBlock Text="Password" FontSize="12" Foreground="Gray"/>
-                <PasswordBox Height="32" Margin="0,0,0,10" Padding="8"/>-->
-                <TextBlock Text="Password" FontSize="12" Foreground="Gray"/>
-                <Grid Height="32" Margin="0,0,0,10">
-                    <TextBox x:Name="PasswordTextBox" 
-             Padding="8" 
-             Visibility="Collapsed"
-             TextChanged="Password_Changed"/>
-                    <PasswordBox x:Name="PasswordBox" 
-                 Padding="8"
-                 PasswordChanged="Password_Changed"/>
-                    <Button x:Name="TogglePasswordButton"
-            Content="🔒"
-            Width="30"
-            Height="30"
-            HorizontalAlignment="Right"
-            VerticalAlignment="Center"
-            Margin="0,0,5,0"
-            Background="Transparent"
-            BorderThickness="0"
-            Click="TogglePassword_Click"
-            Cursor="Hand"/>
-                </Grid>
-
-
-
+                <TextBox Height="35" Margin="0,0,0,2" Padding="8" x:Name="EmailTextBox"/>
+                <TextBlock x:Name="EmailError"
+                       FontSize="11"
+                       Foreground="Red"
+                       Visibility="Hidden"
+                       Margin="2,0,0,10"/>
 
                 <!-- Create Account -->
-                <Button Content="Login" FontSize="20"
-                Height="38"
-                FontWeight="Bold"
-                Background="#FF2D89EF"
-                Foreground="White"/>
+                <Button Content="Login" FontSize="20" Click="Login_Click"
+                    Height="38"
+                    FontWeight="Bold"
+                    Background="#FF2D89EF"
+                    Foreground="White"/>
 
                 <!-- Dont have an account -->
                 <Button Content=" Create an account?"
-                Margin="0,12,0,0"
-                Background="Transparent"
-                BorderThickness="0"
-                Foreground="#FF2D89EF"
-                HorizontalAlignment="Center"
-                Click="BackToRegister_Click"/>
+                    Margin="0,12,0,0"
+                    Background="Transparent"
+                    BorderThickness="0"
+                    Foreground="#FF2D89EF"
+                    HorizontalAlignment="Center"
+                    Click="BackToRegister_Click"/>
 
             </StackPanel>
         </Border>

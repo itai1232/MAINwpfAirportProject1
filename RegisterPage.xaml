@@ -9,8 +9,24 @@
       Title="RegisterPage">
 
     <Grid>
-        <Image Source="D:\MAINwpfAirportProject\betterRegisterPic.png"
+        <Image Source="D:\MAINwpfAirportProject\pictures\betterRegisterPic.png"
                Stretch="UniformToFill"/>
+        <Border Width="40"
+Height="40"
+CornerRadius="19"
+Background="#AAFFFFFF"
+HorizontalAlignment="Left"
+VerticalAlignment="Top"
+Margin="20">
+
+            <Button Content="X"
+    FontSize="30"
+    FontWeight="Bold"
+    Background="Transparent"
+    BorderThickness="0"
+    Cursor="Hand"
+    Click="BackToHome_Click"/>
+        </Border>
 
         <Border
         Width="380"
@@ -29,78 +45,80 @@
                        HorizontalAlignment="Center"/>
 
             <!-- First Name -->
-            <TextBlock Text="First Name" FontSize="12" Foreground="Gray"/>
-            <TextBox Height="32" Margin="0,0,0,10" Padding="8"/>
+            <!--<TextBlock Text="First Name" FontSize="12" Foreground="Gray"/>
+            <TextBox Height="35" Margin="0,0,0,10" Padding="8"/>-->
+                <TextBlock Text="First Name" FontSize="12" Foreground="Gray"/>
+                <TextBox x:Name="FirstNameTextBox"
+         Height="35"
+         Padding="8"
+         VerticalContentAlignment="Center"/>
+                <TextBlock x:Name="FirstNameError"
+           Height="14"
+           FontSize="11"
+           Foreground="Red"
+           Visibility="Hidden"
+           Margin="0,2,0,6"/>
 
-            <!-- Last Name -->
-            <TextBlock Text="Last Name" FontSize="12" Foreground="Gray"/>
-            <TextBox Height="32" Margin="0,0,0,10" Padding="8"/>
+                <!-- Last Name -->
+            <!--<TextBlock Text="Last Name" FontSize="12" Foreground="Gray"/>
+            <TextBox Height="35" Margin="0,0,0,10" Padding="8"/>-->
+                <TextBlock Text="Last Name" FontSize="12" Foreground="Gray"/>
+                <TextBox x:Name="LastNameTextBox"
+         Height="35"
+         Padding="8"
+         VerticalContentAlignment="Center"/>
+                <TextBlock x:Name="LastNameError"
+           Height="14"
+           FontSize="11"
+           Foreground="Red"
+           Visibility="Hidden"
+           Margin="0,2,0,6"/>
 
-            <!-- Phone Number -->
-            <TextBlock Text="Phone Number" FontSize="12" Foreground="Gray"/>
-            <TextBox Height="32" Margin="0,0,0,10" Padding="8"/>
+                <!-- Phone Number -->
+            <!--<TextBlock Text="Phone Number" FontSize="12" Foreground="Gray"/>
+            <TextBox Height="35" Margin="0,0,0,10" Padding="8"/>-->
+                <TextBlock Text="Phone" FontSize="12" Foreground="Gray"/>
+                <TextBox x:Name="PhoneTextBox"
+         Height="35"
+         Padding="8"
+         VerticalContentAlignment="Center"/>
+                <TextBlock x:Name="PhoneError"
+           Height="14"
+           FontSize="11"
+           Foreground="Red"
+           Visibility="Hidden"
+           Margin="0,2,0,6"/>
 
-            <!-- Email -->
-            <TextBlock Text="Email" FontSize="12" Foreground="Gray"/>
-            <TextBox Height="32" Margin="0,0,0,10" Padding="8"/>
+                <!-- Email -->
+            <!--<TextBlock Text="Email" FontSize="12" Foreground="Gray"/>
+            <TextBox Height="35" Margin="0,0,0,10" Padding="8"/>-->
+                <TextBlock Text="Email" FontSize="12" Foreground="Gray"/>
+                <TextBox x:Name="EmailTextBox"
+         Height="35"
+         Padding="8"
+         VerticalContentAlignment="Center"/>
+                <TextBlock x:Name="EmailError"
+           Height="14"
+           FontSize="11"
+           Foreground="Red"
+           Visibility="Hidden"
+           Margin="0,2,0,6"/>
 
-            <!-- Country -->
+                <!-- Country -->
             <TextBlock Text="Country" FontSize="12" Foreground="Gray"/>
             <ComboBox x:Name="countriesscrollview" SelectionChanged="SelectCountry"
-                     Height="32" Margin="0,0,0,10" Padding="8"/>
+                     Height="35" Margin="0,0,0,10" Padding="8"/>
+                
 
-                <!-- Password -->            
-                <TextBlock Text="Password" FontSize="12" Foreground="Gray"/>
-                <Grid Height="32" Margin="0,0,0,10">
-                    <TextBox x:Name="PasswordTextBox" 
-             Padding="8" 
-             Visibility="Collapsed"
-             TextChanged="Password_Changed"/>
-                    <PasswordBox x:Name="PasswordBox" 
-                 Padding="8"
-                 PasswordChanged="Password_Changed"/>
-                    <Button x:Name="TogglePasswordButton"
-            Content="👁"
-            Width="30"
-            Height="30"
-            HorizontalAlignment="Right"
-            VerticalAlignment="Center"
-            Margin="0,0,5,0"
-            Background="Transparent"
-            BorderThickness="0"
-            Click="TogglePassword_Click"
-            Cursor="Hand"/>
-                </Grid>
 
-                <!-- Confirm Password -->
-                <TextBlock Text="Confirm Password" FontSize="12" Foreground="Gray"/>
-                <Grid Height="32" Margin="0,0,0,20">
-                    <TextBox x:Name="ConfirmPasswordTextBox" 
-             Padding="8" 
-             Visibility="Collapsed"
-             TextChanged="ConfirmPassword_Changed"/>
-                    <PasswordBox x:Name="ConfirmPasswordBox" 
-                 Padding="8"
-                 PasswordChanged="ConfirmPassword_Changed"/>
-                    <Button x:Name="ToggleConfirmPasswordButton"
-            Content="👁"
-            Width="30"
-            Height="30"
-            HorizontalAlignment="Right"
-            VerticalAlignment="Center"
-            Margin="0,0,5,0"
-            Background="Transparent"
-            BorderThickness="0"
-            Click="ToggleConfirmPassword_Click"
-            Cursor="Hand"/>
-                </Grid>
 
                 <!-- Create Account -->
-            <Button Content="Create Account"
+            <Button Content="Create Account" Click="Register_Click"
                     Height="38"
                     FontWeight="Bold"
                     Background="#FF2D89EF"
-                    Foreground="White"/>
+                    Foreground="White"
+                    />
 
             <!-- Already have an account -->
             <Button Content="Already have an account?"
