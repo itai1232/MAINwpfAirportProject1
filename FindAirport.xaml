@@ -1,0 +1,204 @@
+﻿<Page x:Class="MAINwpfAirportProject.FindAirport"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:MAINwpfAirportProject"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="FindAirport"
+      Loaded="Page_Loaded">
+
+    <Grid>
+
+        <!-- Background -->
+        <Image Source="D:\MAINwpfAirportProject\pictures\AIEnhancer_צילום מסך 2026-02-10 122057.png"
+           Stretch="UniformToFill"/>
+
+        <!-- Dark overlay -->
+        <Rectangle Fill="#99000000"/>
+
+        <!-- MAIN GLASS CARD -->
+        <Border Margin="90"
+            Background="#DD111827"
+            CornerRadius="20"
+            Padding="40">
+
+            <Grid>
+
+                <!-- ROW STRUCTURE -->
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <!-- Header -->
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="Auto"/>
+                    <!-- Search -->
+                    <RowDefinition Height="40"/>
+                    <RowDefinition Height="*"/>
+                    <!-- Results -->
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="Auto"/>
+                    <!-- Buttons -->
+                </Grid.RowDefinitions>
+
+                <!-- HEADER -->
+                <Border Background="#1F6FDB"
+                    CornerRadius="16"
+                    Padding="18">
+
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+
+                        <!-- Back arrow -->
+                        <Button Width="40"
+                            Height="40"
+                            Background="Transparent"
+                            BorderThickness="0"
+                            Cursor="Hand"
+                            Click="Back_Click">
+
+                            <materialDesign:PackIcon Kind="ArrowLeft"
+                                                 Foreground="White"
+                                                 Width="24"
+                                                 Height="24"/>
+                        </Button>
+
+                        <!-- Title -->
+                        <StackPanel Grid.Column="1"
+                                Orientation="Horizontal"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center">
+
+                            <materialDesign:PackIcon Kind="Magnify"
+                                                 Width="26"
+                                                 Height="26"
+                                                 Foreground="White"
+                                                 Margin="0,0,10,0"/>
+
+                            <TextBlock Text="Find Airport"
+                                   FontSize="24"
+                                   FontWeight="Bold"
+                                   Foreground="White"/>
+                        </StackPanel>
+                    </Grid>
+                </Border>
+
+                <!-- SEARCH BAR -->
+                <Border Grid.Row="2"
+                    Background="#1F2937"
+                    CornerRadius="14"
+                    Padding="16">
+
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <materialDesign:PackIcon Kind="Magnify"
+                                             Width="20"
+                                             Height="20"
+                                             Foreground="#60A5FA"
+                                             VerticalAlignment="Center"
+                                             Margin="0,0,12,0"/>
+
+                        <TextBox Grid.Column="1"
+                             BorderThickness="0"
+                             Background="Transparent"
+                             Foreground="White"
+                             FontSize="16"
+                             VerticalContentAlignment="Center"
+                             TextChanged="Search_TextChanged"/>
+                    </Grid>
+                </Border>
+
+                <!-- RESULTS AREA -->
+                <Border Grid.Row="4"
+                    Background="#1C2431"
+                    CornerRadius="16"
+                    Padding="20">
+
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="180"/>
+                            <ColumnDefinition Width="25"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <!-- LEFT IMAGE -->
+                        <Border Width="180"
+                            Height="260"
+                            CornerRadius="14"
+                            ClipToBounds="True"
+                            VerticalAlignment="Top">
+
+                            <Image Source="D:\MAINwpfAirportProject\pictures\AIEnhancer_צילום מסך 2026-02-10 122106.png"
+                               Stretch="UniformToFill"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"/>
+                        </Border>
+
+                        <!-- RIGHT SCROLLABLE RESULTS -->
+                        <ScrollViewer Grid.Column="2"
+                                  VerticalScrollBarVisibility="Auto">
+
+                            <StackPanel x:Name="resultsPanel"/>
+
+                        </ScrollViewer>
+
+                    </Grid>
+                </Border>
+
+                <!-- BOTTOM BUTTONS -->
+                <Grid Grid.Row="6">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="30"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+                    <Border Grid.Column="0"
+                        CornerRadius="14"
+                        Background="#2563EB">
+
+                        <Button Content="Arrivals"
+                            x:Name="arrivalsButton"
+                            IsEnabled="False"
+                            Height="60"
+                            Background="Transparent"
+                            BorderThickness="0"
+                            Foreground="White"
+                            FontWeight="Bold"
+                            FontSize="16"
+                            Cursor="Hand"
+                                Click="Arrivals_Click"/>
+                    </Border>
+
+                    <Border Grid.Column="2"
+                        CornerRadius="14"
+                        Background="#2563EB">
+
+                        <Button Content="Departures"
+                            x:Name="departuresButton"
+                            IsEnabled="False"
+                            Height="60"
+                            Background="Transparent"
+                            BorderThickness="0"
+                            Foreground="White"
+                            FontWeight="Bold"
+                            FontSize="16"
+                            Cursor="Hand"
+                                Click="Departures_Click"/>
+                    </Border>
+                </Grid>
+
+            </Grid>
+        </Border>
+
+    </Grid>
+</Page>

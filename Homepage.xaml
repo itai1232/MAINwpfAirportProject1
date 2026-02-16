@@ -4,129 +4,213 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:MAINwpfAirportProject"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       mc:Ignorable="d"
-      d:DesignHeight="450"
-      d:DesignWidth="800"
       Title="Homepage">
 
     <Grid>
 
         <!-- background -->
-        <Image Source="D:\MAINwpfAirportProject\pictures\צילום מסך 2026-01-01 103859.png"
+        <Image Source="D:\MAINwpfAirportProject\pictures\darkairportimproved.png"
                Stretch="UniformToFill"/>
 
-        <!-- top bar -->
-        <Grid Height="70"
-              VerticalAlignment="Top">
+        <!-- top row -->
+        <Grid Height="70" VerticalAlignment="Top">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
 
-            <TextBlock Text="AeroHub"
+            <!-- title -->
+            <TextBlock Text="SkyLink"
                        FontSize="40"
                        FontWeight="Bold"
-                       Foreground="#061A40"
+                       Foreground="White"
                        VerticalAlignment="Center"
                        Margin="20,0,0,0"/>
-
-            <Button Grid.Column="1"
-                    Content="Register"
-                    Width="110"
-                    Height="36"
+           
+            <!-- register in white box -->
+            <Border Grid.Column="1"
+                    Width="120"
+                    Height="38"
+                    Background="#EFFFFFFF"
+                    CornerRadius="10"
                     HorizontalAlignment="Right"
                     VerticalAlignment="Center"
-                    Margin="0,0,20,0"
-                    Background="Transparent"
-                    BorderThickness="0"
-                    Foreground="#111111"
-                    FontSize="16"
-                    FontWeight="Bold"
-                    Cursor="Hand"
-                    Click="RegisterButton_Click">
-
-                <Button.Style>
-                    <Style TargetType="Button">
-                        <Setter Property="TextBlock.TextDecorations" Value="{x:Null}"/>
-                        <Style.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="TextBlock.TextDecorations" Value="Underline"/>
-                                <Setter Property="Foreground" Value="#061A40"/>
-                            </Trigger>
-                        </Style.Triggers>
-                    </Style>
-                </Button.Style>
-
-            </Button>
+                    Margin="0,0,20,0">
+                <Button Content="Register"
+                        Background="Transparent"
+                        BorderThickness="0"
+                        FontSize="16"
+                        FontWeight="Bold"
+                        Foreground="#061A40"
+                        Cursor="Hand"
+                        Click="RegisterButton_Click"/>
+            </Border>
         </Grid>
 
-        <!-- public actions -->
+        <!-- main actions -->
         <Grid HorizontalAlignment="Center"
               VerticalAlignment="Center"
-              Margin="0,80,0,0">
+              Margin="40,90,40,40"
+              MaxWidth="1000"
+              MinWidth="600">
+
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition Height="24"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="200"/>
-                <ColumnDefinition Width="25"/>
-                <ColumnDefinition Width="200"/>
-                <ColumnDefinition Width="25"/>
-                <ColumnDefinition Width="200"/>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="24"/>
+                <ColumnDefinition/>
             </Grid.ColumnDefinitions>
 
-            <!-- arrivals -->
-            <Button Grid.Column="0"
-                    Height="140"
-                    Background="#AAFFFFFF"
+            <Grid.Resources>
+
+                <!-- tile border style and hover border -->
+                <Style x:Key="TileBorderStyle" TargetType="Border">
+                    <Setter Property="Background" Value="#CFFFFFFF"/>
+                    <Setter Property="CornerRadius" Value="18"/>
+                    <Setter Property="Padding" Value="25"/>
+                    <Setter Property="BorderThickness" Value="1"/>
+                    <Setter Property="BorderBrush" Value="Transparent"/>
+                    <Style.Triggers>
+                 <!--Triggers change the style when a condition is true-->
+                        <!--  כלומר הוא הבן שלוBorder נמצא בתוך Button -->
+                        <!--צריך לבדוק אם העכבר מעל הכפתור, ובשביל זה הולכים לאבא לכפתור-->
+                        <DataTrigger Binding="{Binding IsMouseOver, RelativeSource={RelativeSource AncestorType=Button}}"                                    
+                                     Value="True">
+                            <Setter Property="BorderBrush" Value="White"/>
+                            <!--אם מה שיש בבינדינג הוא אמת אז תעשה את מה שבסטר-->
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+
+            </Grid.Resources>
+
+            <!-- Arrivals -->
+            <Button Grid.Row="0" Grid.Column="0"
+                    Background="Transparent"
+                    BorderBrush="Transparent"
                     BorderThickness="0"
-                    Cursor="Hand">
-                <StackPanel VerticalAlignment="Center">
-                    <TextBlock Text="Arrivals"
-                               FontSize="20"
-                               FontWeight="Bold"
-                               HorizontalAlignment="Center"/>
-                    <TextBlock Text="Live arrival flights"
-                               FontSize="13"
-                               Foreground="Gray"
-                               Margin="0,6,0,0"
-                               HorizontalAlignment="Center"/>
-                </StackPanel>
+                    Padding="0"
+                    HorizontalContentAlignment="Stretch"
+                    VerticalContentAlignment="Stretch"
+                    FocusVisualStyle="{x:Null}"
+                    Cursor="Hand"
+                    Click="Arrivals_Click">
+                <Border Style="{StaticResource TileBorderStyle}">
+                    
+                    <StackPanel>
+                        <materialDesign:PackIcon Kind="AirplaneLanding"
+                             Width="30" Height="30"
+                             HorizontalAlignment="Center"
+                             Margin="0,0,0,8"/>
+                        <TextBlock Text="Arrivals"
+                                   FontSize="24"
+                                   FontWeight="Bold"
+                                   HorizontalAlignment="Center"
+                                   />
+                        <TextBlock Text="Live arrival flights"
+                                   FontSize="14"
+                                   Foreground="#666"
+                                   Margin="0,8,0,0"
+                                   HorizontalAlignment="Center"/>
+                    </StackPanel>
+                </Border>
             </Button>
 
-            <!-- departures -->
-            <Button Grid.Column="2"
-                    Height="140"
-                    Background="#AAFFFFFF"
+            <!-- Departures -->
+            <Button Grid.Row="0" Grid.Column="2"
+                    Background="Transparent"
+                    BorderBrush="Transparent"
                     BorderThickness="0"
-                    Cursor="Hand">
-                <StackPanel VerticalAlignment="Center">
-                    <TextBlock Text="Departures"
-                               FontSize="20"
-                               FontWeight="Bold"
-                               HorizontalAlignment="Center"/>
-                    <TextBlock Text="Scheduled and delayed flights"
-                               FontSize="13"
-                               Foreground="Gray"
-                               Margin="0,6,0,0"
-                               HorizontalAlignment="Center"/>
-                </StackPanel>
+                    Padding="0"
+                    HorizontalContentAlignment="Stretch"
+                    VerticalContentAlignment="Stretch"
+                    FocusVisualStyle="{x:Null}"
+                    Cursor="Hand"
+                    Click="Departures_Click">
+                <Border Style="{StaticResource TileBorderStyle}">
+                    <StackPanel>
+                        <materialDesign:PackIcon Kind="AirplaneTakeoff"
+      Width="30" Height="30"
+      HorizontalAlignment="Center"
+      Margin="0,0,0,8"/>
+                        <TextBlock Text="Departures"
+                                   FontSize="24"
+                                   FontWeight="Bold"
+                                   HorizontalAlignment="Center"/>
+                        <TextBlock Text="Scheduled and delayed flights"
+                                   FontSize="14"
+                                   Foreground="#666"
+                                   Margin="0,8,0,0"
+                                   HorizontalAlignment="Center"/>
+                    </StackPanel>
+                </Border>
             </Button>
 
-            <!-- flight status -->
-            <Button Grid.Column="4"
-                    Height="140"
-                    Background="#AAFFFFFF"
+            <!-- Flight Status -->
+            <Button Grid.Row="2" Grid.Column="0"
+                    Background="Transparent"
+                    BorderBrush="Transparent"
                     BorderThickness="0"
-                    Cursor="Hand">
-                <StackPanel VerticalAlignment="Center">
-                    <TextBlock Text="Flight Status"
-                               FontSize="20"
-                               FontWeight="Bold"
-                               HorizontalAlignment="Center"/>
-                    <TextBlock Text="By flight number"
-                               FontSize="13"
-                               Foreground="Gray"
-                               Margin="0,6,0,0"
-                               HorizontalAlignment="Center"/>
-                </StackPanel>
+                    Padding="0"
+                    HorizontalContentAlignment="Stretch"
+                    VerticalContentAlignment="Stretch"
+                    FocusVisualStyle="{x:Null}"
+                    Cursor="Hand"
+                    Click="FlightStatus_Click">
+                <Border Style="{StaticResource TileBorderStyle}">
+                    <StackPanel>
+                        <materialDesign:PackIcon Kind="ClockOutline"
+      Width="30" Height="30"
+      HorizontalAlignment="Center"
+      Margin="0,0,0,8"/>
+                        <TextBlock Text="Flight Status"
+                                   FontSize="24"
+                                   FontWeight="Bold"
+                                   HorizontalAlignment="Center"/>
+                        <TextBlock Text="Search by flight number"
+                                   FontSize="14"
+                                   Foreground="#666"
+                                   Margin="0,8,0,0"
+                                   HorizontalAlignment="Center"/>
+                    </StackPanel>
+                </Border>
+            </Button>
+
+            <!-- Find Airport -->
+            <Button Grid.Row="2" Grid.Column="2"
+                    Background="Transparent"
+                    BorderBrush="Transparent"
+                    BorderThickness="0"
+                    Padding="0"
+                    HorizontalContentAlignment="Stretch"
+                    VerticalContentAlignment="Stretch"
+                    FocusVisualStyle="{x:Null}"
+                    Cursor="Hand"
+                    Click="AirportSearch_Click">
+                <Border Style="{StaticResource TileBorderStyle}">
+                    <StackPanel>
+                        <materialDesign:PackIcon Kind="Magnify"
+      Width="30" Height="30"
+      HorizontalAlignment="Center"
+      Margin="0,0,0,8"/>
+                        <TextBlock Text="Find Airport"
+                                   FontSize="24"
+                                   FontWeight="Bold"
+                                   HorizontalAlignment="Center"/>
+                        <TextBlock Text="Flights to/from an airport"
+                                   FontSize="14"
+                                   Foreground="#666"
+                                   Margin="0,8,0,0"
+                                   HorizontalAlignment="Center"/>
+                    </StackPanel>
+                </Border>
             </Button>
 
         </Grid>

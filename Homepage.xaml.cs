@@ -30,5 +30,25 @@ namespace MAINwpfAirportProject
 
             this.NavigationService.Navigate(new RegisterPage());
         }
+
+        private void AirportSearch_Click(object sender, RoutedEventArgs e)
+        {
+            this.NavigationService.Navigate(new FindAirport());
+        }
+
+        private void Departures_Click(object sender, RoutedEventArgs e)
+        {
+            this.NavigationService.Navigate(new DeparturesPage());
+        }
+
+        private void Arrivals_Click(object sender, RoutedEventArgs e)
+        {
+            this.NavigationService.Navigate(new ArrivalsPage());
+        }
+
+        private void FlightStatus_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

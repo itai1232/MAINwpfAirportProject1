@@ -9,6 +9,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="MaterialDesignColors" Version="5.3.0" />
+    <PackageReference Include="MaterialDesignThemes" Version="5.3.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Reference Include="AirportService">
       <HintPath>..\Itay Evron Airport Project\AirportService\bin\Debug\net8.0\AirportService.dll</HintPath>
     </Reference>
